@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block config %}
+            <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        {% endblock %}
+        <title>
+            {% block title %}
+                Kerps Maximiliano
+            {% endblock %}
+        </title>
+        {% block links %}
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet"/>
+            <link href="{{asset('css/estilos.css')}}" type="text/css" rel="stylesheet"/>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            {% include 'header.html.twig' %}
+            <main>
+                {% block lista %}{% endblock %}
+                {% block detalle %}{% endblock %}
+            </main>
+        {% endblock %}
+    </body>
+    {% block javascript %}{% endblock %}
+</html>

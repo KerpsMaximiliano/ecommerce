@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block detalle %}
+    <div class="subtitle">Detalle del producto</div>
+    <div class="container-detail">
+        <div>
+            <img class="product-image" src="{{ asset( 'images/'~ producto.getImagen ) }}" alt="{{ producto.getNombre }}">
+        </div>
+        <form class="subcontainer-detail" action="{{ path('agregar_producto') }} " method="POST">
+            <input type="hidden" name="idProducto" value="{{ producto.getId }}">
+            <div class="product-name">{{ producto.getNombre }}</div>
+            <div class="product-description">{{ producto.getDescripcion }}</div>
+            <div class="product-price">${{ producto.getPrecio }}</div>
+            <div><label for="cantidad">Cantidad</label></div>
+            <div>
+                <select id="cantidad" name="cantidad">
+                    {% for i in 1..10 %}
+                        <option> {{ i }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <input class="btn dark" type="submit" value="Agregar al carrito">
+                <a class="btn dark" href="{{ path('listar_productos') }}">Volver</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
