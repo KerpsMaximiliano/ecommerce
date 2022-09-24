@@ -5,13 +5,16 @@
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
+
 a {
   text-decoration: none;
   color: rgb(0, 0, 0);
 }
+
 input {
   border: none;
 }
+
 img {
   background: rgb(122, 122, 122);
   width: 100%;
@@ -38,10 +41,12 @@ header {
   margin-bottom: 1rem;
   font-weight: bold;
 }
+
 .left-section a {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 1);
 }
+
 .right-section {
   display: flex;
   gap: 1rem;
@@ -53,6 +58,7 @@ header {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
   gap: 2rem;
 }
+
 .product-element {
   display: flex;
   flex-direction: column;
@@ -61,10 +67,12 @@ header {
   padding: 1rem;
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
+
 .product-element:hover {
   box-shadow: rgb(0 0 0 / 30%) 0px 2px 4px 0px;
   font-weight: 700;
 }
+
 .flash-notice {
   background: rgb(207, 226, 255);
   color: rgb(64, 110, 193);
@@ -75,16 +83,19 @@ header {
   border-radius: 0.2rem;
   font-family: 'Roboto Mono', monospace;
 }
+
 /* Template detalle */
 .container-detail {
   display: flex;
   gap: 2rem;
 }
+
 .container-detail .product-image {
   width: 250px;
   height: 250px;
   box-shadow: rgb(0 0 0 / 30%) 0px 2px 4px 0px;
 }
+
 .subcontainer-detail {
   display: flex;
   flex-direction: column;
@@ -107,10 +118,12 @@ header {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .ligth {
   background: rgb(255, 255, 255);
   color: rgba(10, 56, 113, 1);
 }
+
 .dark {
   background: rgba(10, 56, 113, 1);
   color:rgb(255, 255, 255);
@@ -157,8 +170,4 @@ header {
 
 .form-login input[type = "email"]:focus, .form-login input[type = "password"]:focus, .form-login button:hover {
   width: 250px;
-}
-
-
-  
 }
