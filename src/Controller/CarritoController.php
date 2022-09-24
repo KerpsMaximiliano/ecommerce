@@ -2,52 +2,56 @@
     namespace App\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
 
     use App\Manager\CarritoManager;
-    use App\Entity\Usuario;
 
     class CarritoController extends AbstractController{
         /**
         * @Route("/carrito/agregar", name="agregar_producto")
         */
         public function agregarProducto(Request $request, CarritoManager $carritoManager): Response {
-            $idProducto = $request->request->get('idProducto');
-            $cantidad = $request->request->get('cantidad');
-
-            $carritoManager->agregarProducto($this->getUser(), $idProducto, $cantidad);
-
-            $this->addFlash('notice', "Se ingreso al carrito $cantidad unidades del producto $idProducto");
+            $productoId = $request->get('productoId');
+            $productoNombre = $request->get('productoNombre');
+            $productoCantidad = $request->get('productoCantidad');
+            $usuario = $this->getUser();
+            $carritoManager->agregarProducto($usuario, $productoId, $productoCantidad);
+            if($productoCantidad>1){
+                $this->addFlash('notice', "Se ingreson $productoCantidad unidades del producto $productoNombre");
+            } else {
+                $this->addFlash('notice', "Se ingreso $productoCantidad unidad del producto $productoNombre");
+            }
             return $this->redirectToRoute('listar_productos');
-        }
-
-        /**
-        * @Route("/carrito/eliminar/{idItem}", name="eliminar_item")
-        */
-        public function eliminarItem(int $idItem, CarritoManager $carritoManager): Response{
-            $carrito = $carritoManager->eliminarItem($idItem, $this->getUser());
-
-            return $this->render('carrito/detalle.html.twig', compact('carrito'));
         }
 
         /**
         * @Route("/carrito/ver", name="ver_carrito")
         */
-        public function verCarrito(CarritoManager $carritoManager): Response{
-            $carrito = $carritoManager->verCarrito($this->getUser());
-
+        public function verCarrito(CarritoManager $carritoManager): Response {
+            $usuario = $this->getUser();
+            $carrito = $carritoManager->verCarrito($usuario);
             return $this->render('carrito/detalle.html.twig', compact('carrito'));
         }
 
         /**
-        * @Route("/carrito/vaciar", name="vaciar_carrito")
+        * @Route("/carrito/finalizar", name="finalizar_compra")
         */
-        public function vaciarCarrito(CarritoManager $carritoManager): Response{
-            $carrito = $carritoManager->vaciarCarrito($this->getUser());
+        public function finalizarCompra(CarritoManager $carritoManager): Response {
+            $usuario = $this->getUser();
+            $carrito = $carritoManager->finalizarCompra($usuario);
+            $this->addFlash('notice', "¡Compra exitosa!");
+            return $this->redirectToRoute('listar_productos');
+        }
 
-            return redirectToRoute('producto/lista.html.twig', compact('carrito'));
+        /**
+        * @Route("/carrito/eliminar/{itemId}", name="eliminar_item")
+        */
+        public function eliminarItem(CarritoManager $carritoManager, int $itemId): Response {
+            $usuario = $this->getUser();
+            $carrito = $carritoManager->eliminarItem($usuario, $itemId);
+            return $this->redirectToRoute('ver_carrito');
         }
     }
 ?>
