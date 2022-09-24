@@ -1,18 +1,18 @@
 <?php
     namespace App\Entity;
 
-    use App\Repository\UsuarioRepository;
+    use Doctrine\ORM\Mapping as ORM;
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
-    use Doctrine\ORM\Mapping as ORM;
-    use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     use Symfony\Component\Security\Core\User\UserInterface;
+    use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
+    use App\Repository\UsuarioRepository;
 
     /**
      * @ORM\Entity(repositoryClass=UsuarioRepository::class)
      */
-    class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
-    {
+    class Usuario implements UserInterface, PasswordAuthenticatedUserInterface{
         /**
          * @ORM\Id
          * @ORM\GeneratedValue
@@ -46,25 +46,20 @@
          */
         private $carritos;
 
-        public function __construct()
-        {
+        public function __construct(){
             $this->carritos = new ArrayCollection();
         }
 
-        public function getId(): ?int
-        {
+        public function getId(): ?int {
             return $this->id;
         }
 
-        public function getEmail(): ?string
-        {
+        public function getEmail(): ?string {
             return $this->email;
         }
 
-        public function setEmail(string $email): self
-        {
+        public function setEmail(string $email): self {
             $this->email = $email;
-
             return $this;
         }
 
@@ -73,50 +68,41 @@
          *
          * @see UserInterface
          */
-        public function getUserIdentifier(): string
-        {
+        public function getUserIdentifier(): string {
             return (string) $this->email;
         }
 
         /**
          * @deprecated since Symfony 5.3, use getUserIdentifier instead
          */
-        public function getUsername(): string
-        {
+        public function getUsername(): string {
             return (string) $this->email;
         }
 
         /**
          * @see UserInterface
          */
-        public function getRoles(): array
-        {
+        public function getRoles(): array {
             $roles = $this->roles;
             // guarantee every user at least has ROLE_USER
             $roles[] = 'ROLE_USER';
-
             return array_unique($roles);
         }
 
-        public function setRoles(array $roles): self
-        {
+        public function setRoles(array $roles): self {
             $this->roles = $roles;
-
             return $this;
         }
 
         /**
          * @see PasswordAuthenticatedUserInterface
          */
-        public function getPassword(): string
-        {
+        public function getPassword(): string {
             return $this->password;
         }
 
-        public function setPassword(string $password): self
-        {
+        public function setPassword(string $password): self {
             $this->password = $password;
-
             return $this;
         }
 
@@ -126,59 +112,49 @@
          *
          * @see UserInterface
          */
-        public function getSalt(): ?string
-        {
+        public function getSalt(): ?string {
             return null;
         }
 
         /**
          * @see UserInterface
          */
-        public function eraseCredentials()
-        {
+        public function eraseCredentials(){
             // If you store any temporary, sensitive data on the user, clear it here
             // $this->plainPassword = null;
         }
 
-        public function getNombre(): ?string
-        {
+        public function getNombre(): ?string{
             return $this->nombre;
         }
 
-        public function setNombre(string $nombre): self
-        {
+        public function setNombre(string $nombre): self {
             $this->nombre = $nombre;
-
             return $this;
         }
 
         /**
          * @return Collection<int, Carrito>
          */
-        public function getCarritos(): Collection
-        {
+        public function getCarritos(): Collection {
             return $this->carritos;
         }
 
-        public function addCarrito(Carrito $carrito): self
-        {
+        public function addCarrito(Carrito $carrito): self {
             if (!$this->carritos->contains($carrito)) {
                 $this->carritos[] = $carrito;
                 $carrito->setUsuario($this);
             }
-
             return $this;
         }
 
-        public function removeCarrito(Carrito $carrito): self
-        {
+        public function removeCarrito(Carrito $carrito): self {
             if ($this->carritos->removeElement($carrito)) {
                 // set the owning side to null (unless already changed)
                 if ($carrito->getUsuario() === $this) {
                     $carrito->setUsuario(null);
                 }
             }
-
             return $this;
         }
     }
