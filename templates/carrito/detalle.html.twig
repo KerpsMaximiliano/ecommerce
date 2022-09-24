@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block detalleCarrito %}
+    <div class="subtitle">Su carrito</div>
+    <div>
+        {% for item in carrito.getItems %}
+            <a href="{{ path('detalle_producto', {id: item.getProducto.getId}) }}">
+                <div>
+                    <div>
+                    <img class="product-image" src="{{ asset('images/'~ item.getProducto.getImagen ) }}" alt="{{ item.getProducto.getNombre }}" loading="lazy"/>
+                    </div>
+                    <div>
+                    {{ item.getProducto.getNombre }}
+                    {{ item.getProducto.getDescripcion }}
+                    {{ item.getProducto.getPrecio }}
+                    </div>
+                    <div>
+                    {{ item.getCantidad }}
+                    </div>
+                    {{ item.getTotal }}
+                
+                </div>
+            </a>
+        {% endfor %}
+        {{ carrito.getTotal }}
+    </div>
+{% endblock %}
