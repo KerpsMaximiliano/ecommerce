@@ -1,7 +1,9 @@
 <?php
     namespace App\Negocio;
+
     class Almacen{
         private array $productos;
+
         function __construct(){
             $this->productos=[
                 0 => [
@@ -76,9 +78,11 @@
                 ],
             ];
         }
+
         public function findAll(){
             return $this->productos;
         }
+        
         public function find($id){
             return $this->productos[$id-1];  
         }
