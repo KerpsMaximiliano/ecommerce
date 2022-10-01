@@ -1,0 +1,156 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+body,
+header,
+main,
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+header nav, main, footer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #062e5f;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, p, figure {
+    margin: 0;
+}
+
+/* -------------------------------------------------- */
+/*  Structure in body
+    header {
+        nav {
+            section {
+                a {
+                    img {}
+                    h1 {}
+                }
+            }
+            section .menu {
+                a {
+                    buttom {
+                        img {}
+                        span {}
+                    }
+                }
+            }
+        }
+    }
+    main {}
+    footer {}
+*/
+/* Other styles:
+    button
+    #logo
+    .icon
+*/
+/* -------------------------------------------------- */
+
+header {
+    width: 100%;
+    margin: auto;
+    padding: 0.5rem 0rem;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav section {
+    padding: 0rem 1rem;
+}
+
+header nav section a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header nav section a h1 {
+    font-size: 1rem;
+    padding-top: 0.4rem;
+}
+
+header nav .menu {
+    display: flex;
+    gap: 0.8rem;
+}
+
+/* -------------------------------------------------- */
+
+button {
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0rem;
+    color: #062e5f;
+    background: none;
+    border: 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid #062e5f;
+    border-radius: 4px;
+}
+
+/* -------------------------------------------------- */
+
+main {
+    padding: 1rem 0rem;
+}
+
+/* -------------------------------------------------- */
+
+/*
+footer {
+
+}
+*/
+
+/* -------------------------------------------------- */
+
+/* Icon size on buttons (1:1) | From: https://www.iconfinder.com/ */
+/*
+    Buttom      Img
+    Your Cart   cart.png
+    Sign off    exit.png
+*/
+.icon {
+    width: 24px;
+}
+
+/* Logo ecommerce size (4:3)(logo.png) */
+#logo {
+    width: 64px;
+}

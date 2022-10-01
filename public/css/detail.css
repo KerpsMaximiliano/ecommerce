@@ -1,0 +1,172 @@
+/*  Structure
+    main {
+        article {
+            section {
+                figure {
+                    img {}
+                }
+            }
+            section {
+                ul {
+                    li {
+                        figcaption {
+                            h2 {}
+                        }
+                    }
+                    li {
+                        h3 {}
+                        button {}
+                    }
+                    li {
+                        h4 {}
+                    }
+                    li {
+                        form {
+                            input (hidden) id
+                            input (hidden) name
+                            input (hidden) units
+                            button (submit) {
+                                img {}
+                                span {}
+                            }
+                            a {
+                                button {
+                                    img {}
+                                    span {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+*/
+/* -------------------------------------------------- */
+
+body {
+    background-color: #fff;
+    color: #062e5f;
+}
+
+main article {
+    width: 100%;
+    max-width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    justify-content: center;
+    align-items: center;
+}
+
+main article .col-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main article .col-1 figure img {
+    width: 440px;
+    height: 440px;
+}
+
+main article .col-2 {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    border: 2px solid rgb(218, 218, 218);
+    border-radius: 7px;
+    padding: 1rem 1.5rem;
+}
+
+main article .col-2 div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* -------------------------------------------------- */
+
+main article .col-2 .row-1 figcaption h2 {
+    font-size: 2rem;
+}
+
+main article .col-2 .row-3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid rgb(218, 218, 218);
+}
+
+main article .col-2 .row-3 h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+main article .col-2 .row-3 .wrapper {
+    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+main article .col-2 .row-3 .wrapper span {
+    background-color: #062e5f;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: #fff;
+    font-family: monospace;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+main article .col-2 .row-3 .wrapper #less {
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+main article .col-2 .row-3 .wrapper #num {
+    border-right: 2px solid rgba(255, 255, 255, 1);
+	border-left: 2px solid rgba(255, 255, 255, 1);
+	pointer-events: none;
+}
+
+main article .col-2 .row-3 .wrapper #more {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+main article section .row-4 {
+    border-top: 2px solid rgb(218, 218, 218);
+}
+
+main article section .row-4 form {
+    width: 100%;
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  gap: 2rem;*/
+}
+
+main article section .row-4 form div {
+    justify-content: center;
+}
+
+main article section .row-4 form div button {
+    color: #fff;
+    background-color: #062e5f;
+    border-radius: 7px;
+}
+
+main article section .row-4 form div button:hover {
+    border: none;
+}
+
+/* -------------------------------------------------- */
