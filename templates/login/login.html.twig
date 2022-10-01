@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
+{% block links %}
+    {{ parent() }}
+    <link href="{{ asset('css/login.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% use "header.html.twig" %}
 {% block body %}
     {% if error %}
-        <div>Usuario o contraseña incorrecta</div>
+        <p>Error</p>
     {% endif %}
-    <form class="form-login" action="{{ path('app_login') }}" method="post">
+    <form class="form-login" action="{{ path('app_login') }}" method="post" autocomplete="off">
         <span>Iniciar sesión</span>
-        <input class="form-email" type="email" id="username" name="_username" value="{{ last_username }}" placeholder="Correo electronico" required/>
+        <input class="form-email" type="email" id="username" name="_username" value="{{ userName }}" placeholder="Correo electronico" required/>
         <input class="form-password" type="password" id="password" name="_password" placeholder="Contraseña" required/>
         <button class="form-submit" type="submit">Ingresar</button>
     </form>
 {% endblock %}
+{% use "footer.html.twig" %}
