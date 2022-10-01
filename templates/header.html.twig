@@ -1,9 +1,29 @@
-<header>
-    <div class="left-section">
-        <a href="{{ path('listar_productos') }}">Carrito de Compras</a>
-    </div>
-    <div class="right-section">
-        <a class="btn ligth" href="{{ path('ver_carrito') }}">Ver carrito</a>
-        <a class="btn ligth" href="{{ path('app_logout') }}">Salir</a>
-    </div>
-</header>
+{% block header %}
+    <nav>
+        <section>
+            <a href="{{ path('listar_productos') }}">
+                <img id="logo" src="{{ asset('images/icons/logo.png') }}" alt="Ecommerce logo"><h1>ECOMMERCE</h1>
+            </a>
+        </section>
+        <section class="menu">
+            {% if app.user %}
+                <a href="{{ path('ver_carrito') }}">
+                    <button>
+                        <img class="icon" src="{{ asset('images/icons/your_cart.png') }}" alt="Your shopping cart"><span> Your Cart</span>
+                    </button>                    
+                </a>
+                <a href="{{ path('app_logout') }}">
+                    <button>
+                        <img class="icon" src="{{ asset('images/icons/sign_out.png') }}" alt="Sign out"><span> Sign Out</span>
+                    </button>
+                </a>
+            {% else %}
+                <a href="{{ path('app_login') }}">
+                    <button>
+                        <img class="icon" src="{{ asset('images/icons/sign_in.png') }}" alt="Sign in"><span> Sign In</span>
+                    </button>
+                </a>
+            {% endif %}
+        </section>
+    </nav>
+{% endblock %}

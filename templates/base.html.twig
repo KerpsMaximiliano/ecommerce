@@ -2,30 +2,31 @@
 <html>
     <head>
         {% block config %}
-            <meta charset="UTF-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
         {% endblock %}
-        <title>
-            {% block title %}
-                Kerps Maximiliano
-            {% endblock %}
-        </title>
+        {% block title %}
+            <title>Ecommerce - Kerps Maximiliano</title>
+        {% endblock %}
         {% block links %}
-            <link rel="preconnect" href="https://fonts.googleapis.com"/>
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-            <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet"/>
-            <link href="{{asset('css/estilos.css')}}" type="text/css" rel="stylesheet"/>
+            <link href="{{asset('css/reset.css')}}" type="text/css" rel="stylesheet" />
+            <link href="{{asset('css/style.css')}}" type="text/css" rel="stylesheet" />
         {% endblock %}
     </head>
     <body>
         {% block body %}
-            {% include 'header.html.twig' %}
+            <header>
+                {% block header %}{% endblock %}
+            </header>
             <main>
-                {% block lista %}{% endblock %}
-                {% block detalleProducto %}{% endblock %}
-                {% block detalleCarrito %}{% endblock %}
+                {% block home %}{% endblock %}
+                {% block detail %}{% endblock %}
+                {% block cart %}{% endblock %}
             </main>
+            <footer>
+                {% block footer %}{% endblock %}
+            </footer>
+            {% block javascript %}{% endblock %}
         {% endblock %}
     </body>
-    {% block javascript %}{% endblock %}
 </html>
