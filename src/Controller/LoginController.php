@@ -10,21 +10,16 @@
         /**
         * @Route("/login", name="app_login")
         */
-        public function index(AuthenticationUtils $authenticationUtils): Response{
-            // get the login error if there is one
+        public function index(AuthenticationUtils $authenticationUtils): Response {
             $error = $authenticationUtils->getLastAuthenticationError();
-            // last username entered by the user
-            $lastUsername = $authenticationUtils->getLastUsername();
-            return $this->render('login/login.html.twig', [
-                'last_username' => $lastUsername,
-                'error' => $error,
-            ]);
+            $userName = $authenticationUtils->getLastUsername();
+            return $this->render('login/login.html.twig', compact('userName', 'error'));
         }
 
         /**
         * @Route("/logout", name="app_logout", methods={"GET"})
         */
-        public function logout(): void{
+        public function logout(): void {
             // controller can be blank: it will never be called!
             throw new \Exception('Don\'t forget to activate logout in security.yaml');
         }

@@ -32,7 +32,7 @@
         public function verCarrito(CarritoManager $carritoManager): Response {
             $usuario = $this->getUser();
             $carrito = $carritoManager->verCarrito($usuario);
-            return $this->render('carrito/detalle.html.twig', compact('carrito'));
+            return $this->render('cart/cart.html.twig', compact('carrito'));
         }
 
         /**
@@ -51,6 +51,15 @@
         public function eliminarItem(CarritoManager $carritoManager, int $itemId): Response {
             $usuario = $this->getUser();
             $carrito = $carritoManager->eliminarItem($usuario, $itemId);
+            return $this->redirectToRoute('ver_carrito');
+        }
+
+        /**
+        * @Route("/carrito/vaciar", name="vaciar_carrito")
+        */
+        public function vaciarCarrito(CarritoManager $carritoManager): Response {
+            $usuario = $this->getUser();
+            $carrito = $carritoManager->vaciarCarrito($usuario);
             return $this->redirectToRoute('ver_carrito');
         }
     }

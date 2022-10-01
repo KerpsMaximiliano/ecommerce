@@ -12,22 +12,22 @@
         * @Route("/", name="listar_productos")
         */
         public function listarProductos(ProductoManager $productoManager): Response {
-            $productos = $productoManager->getProductos();
-            if (!$productos){
-                throw $this->createNotFoundException($productos.' no encontrado.');
+            $products = $productoManager->getProductos();
+            if (!$products){
+                throw $this->createNotFoundException($products.' no encontrado.');
             }
-            return $this->render('producto/lista.html.twig', compact('productos'));
+            return $this->render('product/home.html.twig', compact('products'));
         }
         
         /**
         * @Route("/producto/{id}", name="detalle_producto")
         */
         public function detalleProducto(ProductoManager $productoManager, int $id): Response{
-            $producto = $productoManager->getProducto($id);
-            if (!$producto){
+            $product = $productoManager->getProducto($id);
+            if (!$product){
                 throw $this->createNotFoundException($producto.' no encontrado.');
             }
-            return $this->render('producto/detalle.html.twig', compact('producto'));
+            return $this->render('product/detail.html.twig', compact('product'));
         }
     }
 ?>

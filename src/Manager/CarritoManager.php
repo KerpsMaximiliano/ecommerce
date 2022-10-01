@@ -17,10 +17,10 @@
             return $carrito = $this->doctrine->getRepository(Carrito::class)->findOneBy(compact('usuario', 'estado'));
         }
 
-        public function agregarProducto(Usuario $usuario, int $productoId, int $cantidad) {
+        public function agregarProducto(Usuario $usuario, int $productoId, int $productoCantidad) {
             $producto = $this->doctrine->getRepository(Producto::class)->find($productoId);
             $carrito = $this->obtenerCarrito($usuario);
-            $item = $carrito->agregarItem($producto, $cantidad);
+            $item = $carrito->agregarItem($producto, $productoCantidad);
             $entityManager = $this->doctrine->getManager();
             $entityManager->persist($carrito);
             $entityManager->persist($item);
@@ -33,7 +33,7 @@
             $carrito->setEstado('Finalizado');
             $carrito->setConfirmado(new \DateTime());
             $entityManager = $this->doctrine->getManager();
-            $entityManager->persist($carrito); // ?
+            $entityManager->persist($carrito);
             $entityManager->flush();
         }
 
@@ -50,7 +50,13 @@
         public function vaciarCarrito(Usuario $usuario){
             $estado = 'Iniciado';
             $carrito = $this->doctrine->getRepository(Carrito::class)->findOneBy(compact('usuario', 'estado'));
-            // Falta terminar.
+            $items = $carrito->getItems();
+            $entityManager = $this->doctrine->getManager();
+            foreach($items as $item ){
+                $carrito->removeItem($item);
+                $entityManager->remove($item);
+            }
+            $entityManager->flush();
         }
 
         private function obtenerCarrito($usuario){

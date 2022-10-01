@@ -134,6 +134,18 @@
             return $item;
         }
 
+        public function items(): bool {
+            $i = 0;
+            foreach($this->getItems() as $item){
+                $i++;
+            }
+            if ($i < 1){
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         public function getTotal(){
             $total = 0;
             foreach($this->getItems() as $item){
