@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{% block links %}
+    {{ parent() }}
+    <link href="{{ asset('css/home.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% use "header.html.twig" %}
+{% block home %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <section>
+        {% for product in products %}
+            <a href="{{ path('detalle_producto', {id: product.getId}) }}">
+                <article>
+                    <figure><img src="{{ asset('images/'~ product.getImagen ) }}" alt="{{ product.getNombre }}" loading="lazy" /></figure>
+                    <figcaption><h2>{{ product.getNombre }}</h2></figcaption>
+                    <p>${{ product.getPrecio }}</p>
+                </article>
+            </a>
+        {% endfor %}
+    </section>
+{% endblock %}
+{% use "footer.html.twig" %}

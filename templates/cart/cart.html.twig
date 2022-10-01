@@ -1,0 +1,79 @@
+{% extends "base.html.twig" %}
+{% block links %}
+    {{ parent() }}
+    <link href="{{ asset('css/cart.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% use "header.html.twig" %}
+{% block cart %}
+    <table>
+        {% if carrito != null %}
+            {% if carrito.items %}
+                <caption>Your shopping cart</caption>
+                <thead>
+                    <tr>
+                        <th colspan="2">Products</th>
+                        <th>Units</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in carrito.getItems %}
+                        <tr>
+                            <td class="col-1">
+                                <a href="{{ path('detalle_producto', {id: item.getProducto.getId}) }}">
+                                    <img class="product-image" src="{{ asset('images/'~ item.getProducto.getImagen ) }}" alt="{{ item.getProducto.getNombre }}" loading="lazy"/>
+                                </a>
+                            </td>
+                            <td class="col-2">
+                                <div class="product-name">
+                                    {{ item.getProducto.getNombre }}
+                                </div>
+                                <div class="product-description">
+                                    {{ item.getProducto.getDescripcion }}
+                                </div>
+                                <div class="product-price">
+                                    ${{ item.getProducto.getPrecio }}
+                                </div>
+                            </td>
+                            <td class="col-3">
+                                {{ item.getCantidad }}
+                            </td>
+                            <td class="col-4">
+                                ${{ item.getTotal }}
+                            </td>
+                            <td class="col-5">
+                                <a href="{{ path('eliminar_item', {itemId: item.getId}) }}">
+                                    <button>X</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row-btn">
+                                <a href="{{ path('finalizar_compra') }}">
+                                    <button type="button">
+                                        <img class="icon" src="{{ asset('images/icons/confirm_cart.png') }}" alt="Confirm purchase"><span> Confirm</span>
+                                    </button>
+                                </a>
+                                <a href="{{ path('vaciar_carrito') }}">
+                                    <button type="button">
+                                        <img class="icon" src="{{ asset('images/icons/cancel_cart.png') }}" alt="Cancel purchase"><span> Cancel</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="row-ttl" colspan="1">Total</td>
+                        <td class="row-ttl" colspan="1">${{ carrito.getTotal }}</td>
+                    </tr>
+                </tfoot>
+            {% else %}
+                <caption>Your shopping cart is empty</caption>
+            {% endif %}
+        {% else %}
+            <caption>Your shopping cart is empty</caption>
+        {% endif %}
+    </table>
+{% endblock %}

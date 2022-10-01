@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+{% block links %}
+    {{ parent() }}
+    <link href="{{ asset('css/detail.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% use "header.html.twig" %}
+{% block detail %}
+    <article>
+        <section class="col-1">
+            <figure><img src="{{ asset( 'images/'~ product.getImagen ) }}" alt="{{ product.getNombre }}"></figure>
+        </section>
+        <section class="col-2">
+            <div class="row-1"><figcaption><h2>{{ product.getNombre }}</h2></figcaption></div>
+            <div class="row-2"><h4>{{ product.getDescripcion }}</h4></div>
+            <div class="row-3">
+                <h3>$<span id="price">{{ product.getPrecio }}</span></h3>
+                <div class="wrapper">
+                    <span id="less">-</span>
+                    <span id="num">01</span>
+                    <span id="more">+</span>
+                </div>
+            </div>
+            <div class="row-4">
+                <form action="{{ path('agregar_producto') }} " method="POST">
+                    <input type="hidden" name="productoId" value="{{ product.getId }}" />
+                    <input type="hidden" name="productoNombre" value="{{ product.getNombre }}" />
+                    <input id="product-unit" type="hidden" name="productoCantidad" value="1" />
+                    {% if app.user %}
+                        <div>
+                            <button type="submit">
+                                <img class="icon" src="{{ asset('images/icons/add_cart.png') }}" alt="Add to shopping cart"><span> Add To Cart</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{{ path('app_login') }}">
+                                <button type="button">
+                                    <img class="icon" src="{{ asset('images/icons/add_cart.png') }}" alt="Add to shopping cart"><span> Add To Cart</span>
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <!--
+                    <div>
+                        <a href="{{ path('listar_productos') }}">
+                            <button type="button">
+                                <img class="icon" src="{{ asset('images/icons/return.png') }}" alt="Your shopping cart"><span> Return</span>
+                            </button>
+                        </a>
+                    </div>
+                    -->
+                </form>
+            </div>
+        </section>
+    </article>
+{% endblock %}
+{% use "footer.html.twig" %}
+{% block javascript %}
+    <script defer type="text/javascript" src="{{ asset('js/detail.js') }}"></script>
+{% endblock %}
